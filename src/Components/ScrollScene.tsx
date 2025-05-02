@@ -1,20 +1,15 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls,useProgress } from "@react-three/drei";
+import { useProgress } from "@react-three/drei";
 import Museum from "./Museum";
-// import EntranceCamera from "./EntranceCamera";
-import { useRef,useState,useEffect } from "react";
+import { useEffect } from "react";
 import ScrollCameraController from "./ScrollCameraController";
-import EntranceCamera from "./EntranceCamera";
 type SceneProps = {
   className?: string;
   setIsLoaded: (arg0: boolean) => void
 };
 
 const ScrollScene = ({ className,setIsLoaded }: SceneProps) => {
-
-  // const cameraRef = useRef<OrbitControls | null>(null);
-
-    const { progress, loaded } = useProgress();
+    const { loaded } = useProgress();
 
   
     useEffect(() => {
@@ -36,16 +31,6 @@ const ScrollScene = ({ className,setIsLoaded }: SceneProps) => {
         <Museum />
         <ambientLight intensity={1} />
         <directionalLight position={[0, 10, 5]} intensity={1} />
-        {/* <OrbitControls
-          ref={cameraRef}
-          minDistance={5}
-          maxDistance={50}
-          target={[-0.2, 5, 23]}
-          enableDamping={false}
-          enableRotate={false}
-          enableZoom={false}
-        /> */}
-        {/* <EntranceCamera></EntranceCamera> */}
         <ScrollCameraController></ScrollCameraController>
       </Canvas>
     </div>
