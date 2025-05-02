@@ -1,4 +1,10 @@
-import { useEffect, useState } from "react";
+// Utils
+import { setupLenis } from "./assets/scrollHelpers";
+import { useEffect, useState, useRef} from "react";
+import {gsap} from "gsap"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+// Components
 import Nav from "./Components/Nav";
 import HeroSection from "./Components/HeroSection";
 import CardsParallaxSection from "./Components/CardsParallaxSection";
@@ -6,24 +12,42 @@ import CustomCursor from "./Components/CustomCursor";
 import Loader from "./Components/Loader";
 import ScrollingSection from "./Components/ScrollingSection";
 import InteractSection from "./Components/InteractSection";
-import Lenis from "@studio-freight/lenis";
+
+gsap.registerPlugin(ScrollToPlugin)
 
 const App = () => {
-
-  useEffect(() => {
-    const lenis = new Lenis();
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-  }, []);
-
   const [IsSectionVisible, setIsSectionVisible] = useState<boolean>(true);
   const [IsSectionVisible2, setIsSectionVisible2] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  // Lenis Smooth Scroll
+  useEffect(() => {
+    setupLenis()
+  }, []);
+
+  const topRef = useRef<HTMLDivElement | null>(null)
+  const middleRef = useRef<HTMLDivElement | null>(null)
+  const bottomRef = useRef<HTMLDivElement | null>(null)
+
+  const handleClick = (section: string) => {
+    let targetRef: HTMLElement | null = null;
+
+    if (section === "top") {
+      targetRef = topRef.current;
+    } else if (section === "middle") {
+      targetRef = middleRef.current;
+    } else if (section === "bottom") {
+      targetRef = bottomRef.current;
+    }
+
+    if (targetRef) {
+      gsap.to(window, {
+        duration: 3.5,
+        scrollTo: targetRef,
+        ease: "power2.inOut",
+      });
+    }
+  };
 
   return (
     <>
@@ -33,15 +57,15 @@ const App = () => {
 
         <CustomCursor />
 
-        <Nav IsSectionVisible={IsSectionVisible} IsSectionVisible2={IsSectionVisible2}/>
+        <Nav IsSectionVisible={IsSectionVisible} IsSectionVisible2={IsSectionVisible2} onScrollToSection={handleClick}/>
         
-        <HeroSection setIsSectionVisible={setIsSectionVisible}/>
+        <div ref={topRef}><HeroSection setIsSectionVisible={setIsSectionVisible}/></div>
         
-        <CardsParallaxSection/>
+        <div ref={middleRef}><CardsParallaxSection/></div>
 
         <ScrollingSection setIsSectionVisible2={setIsSectionVisible2}setIsLoaded={setIsLoaded}/>
         
-        <InteractSection />
+        <div ref={bottomRef}><InteractSection /></div>
         
       </main>
     </>

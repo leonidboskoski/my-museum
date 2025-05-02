@@ -1,4 +1,4 @@
-import  { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 
 const BoxContent = [
@@ -44,10 +44,13 @@ const CardsParallaxSection = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div ref={ref} className="bg-white w-screen h-[300vh] relative">
-      <div className="sticky top-0 flex flex-col justify-center h-[100vh] bg-white">
+    <div ref={ref} className="bg-white w-screen h-screen md:h-[300vh] relative">
+      <div className="max-sm:hidden sticky top-0 flex flex-col justify-center h-[100vh] bg-white">
         <div className="h-[65vh] overflow-hidden mx-[3%] mb-10">
-          <motion.div style={{ x }} className="w-[300vw] h-[65vh] flex gap-5">
+          <motion.div
+            style={{ x }}
+            className="max-sm:hidden w-[300vw] h-[65vh] flex gap-5"
+          >
             {BoxContent.map((item, index) => (
               <CardBox
                 key={index}
@@ -61,6 +64,9 @@ const CardsParallaxSection = () => {
         </div>
         <SlideTabs activeTab={activeTab} />
       </div>
+      
+      {/* Mobile Slider */}
+      <MobileSlider></MobileSlider>
     </div>
   );
 };
@@ -123,7 +129,7 @@ const SlideTabs = ({ activeTab }: { activeTab: number }) => {
   }, [activeTab]);
 
   return (
-    <ul className="relative flex items-center justify-evenly w-100 h-14 border border-black rounded-full mx-auto">
+    <ul className="max-sm:hidden relative flex items-center justify-evenly w-100 h-14 border border-black rounded-full mx-auto">
       {BoxContent.map((item, key) => (
         <li
           ref={(el) => {
@@ -150,5 +156,35 @@ const Cursor = ({
       animate={position}
       className="absolute z-0 h-12 rounded-full bg-black left-0"
     ></motion.li>
+  );
+};
+
+const MobileSlider = () => {
+  return (
+    <div className="w-screen h-[100vh] bg-white flex items-center md:hidden px-4 overflow-hidden">
+      <motion.div
+        className="flex gap-4 cursor-grab active:cursor-grabbing"
+        drag="x"
+        dragConstraints={{ left: -((BoxContent.length - 1) * 300), right: 0 }}
+        dragElastic={0.1}
+      >
+        {BoxContent.map((item, index) => (
+          <motion.div
+            key={index}
+            className="min-w-[300px] h-[70vh] bg-white rounded-2xl overflow-hidden relative shadow-lg"
+          >
+            <img
+              src={item.imgUrl}
+              className="w-full h-full object-cover absolute top-0 left-0"
+            />
+            <div className="absolute inset-0 bg-black/40"></div>
+            <div className="absolute bottom-5 px-4 text-white z-10">
+              <h1 className="text-xl font-bold">{item.title}</h1>
+              <p className="text-sm">{item.subtitle}</p>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
   );
 };

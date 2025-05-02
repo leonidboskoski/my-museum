@@ -12,7 +12,7 @@ export const Section = ({ text,className,text2 }: SectionProps) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const isInView = useInView(sectionRef, {
-    margin: "-450px",
+    margin: "-200px"
   });
 
   useEffect(() => {
@@ -25,8 +25,8 @@ export const Section = ({ text,className,text2 }: SectionProps) => {
     <motion.div className="h-[100vh]">
       <motion.h1
         variants={{
-          visible: { opacity: 1, y: 0 },
-          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0, transition:{delay:0.1} },
+          hidden: { opacity: 0, y: 20, },
         }}
         initial="hidden"
         animate={visible ? "visible" : "hidden"}
@@ -36,10 +36,10 @@ export const Section = ({ text,className,text2 }: SectionProps) => {
           delay: visible ? 0.2 : 0,
         }}
         ref={sectionRef}
-        className={`sticky top-[40vh] text-center ${className} flex flex-col gap-10 `}
+        className={`sticky md:top-[60vh] lg:top-[40vh] text-center ${className} flex flex-col gap-10 `}
       >
-        <span className="text-7xl uppercase font-bold">{text}</span>
-        <span className="text-xl px-[19%] text-justify leading-[30px] font-thin">{text2}</span>
+        <span className="max-sm:text-[30px] md:text-2xl lg:text-[3vw] 2xl:text-7xl uppercase font-bold">{text}</span>
+        <span className="max-sm:px-0 max-sm:text-[30px] md:text-sm  lg:text-[1.2vw] 2xl:text-xl px-[19%] text-justify sm:leading-[20px] md:leading-[30px] font-thin">{text2}</span>
       </motion.h1>
     </motion.div>
   );

@@ -34,7 +34,7 @@ const ScrollCameraController = () => {
   }, []);
 
   return (
-    <OrbitControls ref={controlsRef} enableZoom={false} enablePan={false} />
+    <OrbitControls ref={controlsRef} enableZoom={false} enablePan={false} enableRotate={false} />
   );
 };
 
