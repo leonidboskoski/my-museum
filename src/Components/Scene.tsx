@@ -25,7 +25,7 @@ const Scene = ({ className }: SceneProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [controls, toggleControls] = useState(false);
 
-  const cameraRef = useRef<OrbitControls | null>(null);
+  const cameraRef = useRef<any>(null);
 
   //Controls Function
   const handleClickArrow = (dir: number) => {

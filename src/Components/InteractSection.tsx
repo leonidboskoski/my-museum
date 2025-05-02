@@ -4,21 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 const InteractSection = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isTouching, setIsTouching] = useState(false);
   const longPressTimer = useRef<NodeJS.Timeout | null>(null);
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { amount: 0.3, once: true });
   const navigate = useNavigate();
 
   const handleTouchStart = () => {
-    setIsTouching(true);
     longPressTimer.current = setTimeout(() => {
       setIsHovered(true);
     }, 300); 
   };
 
   const handleTouchEnd = () => {
-    setIsTouching(false);
     clearTimeout(longPressTimer.current!);
   };
 
