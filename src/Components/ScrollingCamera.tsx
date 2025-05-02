@@ -1,8 +1,7 @@
 import { useThree } from "@react-three/fiber";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useLayoutEffect } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useLayoutEffect } from "react";
 
 gsap.registerPlugin(ScrollTrigger)
 
