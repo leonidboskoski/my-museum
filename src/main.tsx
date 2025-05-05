@@ -7,7 +7,7 @@ import Scene from "./Components/Scene.tsx"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename='/my-museum'>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/experience" element={<Scene/>} />

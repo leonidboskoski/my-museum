@@ -230,7 +230,7 @@ const Scene = ({ className }: SceneProps) => {
             exit="exit"
             className="bg-black/70 w-screen h-screen absolute top-0 z-[999] flex items-center justify-center"
           >
-            <div className="bg-white/90 w-[60vw] h-[80vh] rounded-2xl text-black font-bold flex justify-between items-center px-[2%] overflow-hidden relative">
+            <div className="bg-white/90 md:w-[60vw] h-[80vh] rounded-2xl text-black font-bold flex justify-between items-center px-[2%] overflow-hidden relative w-screen mx-[5%] md:mx-0">
               {/* Left arrow */}
               <motion.span
                 className="rounded-full bg-black/80 flex items-center justify-center"
@@ -281,7 +281,7 @@ const Scene = ({ className }: SceneProps) => {
 
             <IoMdClose
               size={48}
-              className="text-white absolute top-10 left-[95%] cursor-pointer"
+              className="text-white absolute top-10 md:left-[95%] cursor-pointer left-[85%]"
               onClick={() => toggleControls(false)}
             />
           </motion.div>
