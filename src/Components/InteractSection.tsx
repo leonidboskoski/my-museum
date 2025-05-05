@@ -47,7 +47,7 @@ const InteractSection = () => {
             duration: 0.25,
             ease: "easeInOut",
           }}
-          src="/Thumbnail.JPG"
+          src="./Thumbnail.JPG"
           alt="Thumbnail.jpg"
           className="object-cover w-full h-full rounded-3xl"
         />
