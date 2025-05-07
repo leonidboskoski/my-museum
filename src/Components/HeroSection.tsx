@@ -53,8 +53,19 @@ const HeroSection = ({ setIsSectionVisible }: HeroSectionProps) => {
     else setIsSectionVisible(false);
   }, [isInView]);
 
-  const width = useTransform(scrollYProgress, [0, 1], ["300px", "1400px"]);
-  const height = useTransform(scrollYProgress, [0, 1], ["169px", "790px"]);
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+
+  const width = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["300px", `${windowWidth - 200}px`]
+  );
+  const height = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["169px", `${windowHeight - 50}px`]
+  );
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const socialOpacity = useTransform(scrollYProgress, [0.5, 0.7], [0, 1]);
@@ -119,8 +130,9 @@ const HeroSection = ({ setIsSectionVisible }: HeroSectionProps) => {
             allowFullScreen
             title="Leighton Museum"
           />
+          <div className=" absolute inset-0"></div>
         </motion.div>
-        
+
         <div className="w-screen h-screen sm:hidden flex flex-col items-center justify-evenly">
           <div className=" w-[400vw] overflow-hidden z-0">
             <motion.div
@@ -153,7 +165,7 @@ const HeroSection = ({ setIsSectionVisible }: HeroSectionProps) => {
             initial="hidden"
             animate="visible"
             transition={{
-              duration:0.5
+              duration: 0.5,
             }}
             className="text-white text-3xl flex flex-col justify-between h-48 w-screen z-[200]"
           >
@@ -191,10 +203,10 @@ const HeroSection = ({ setIsSectionVisible }: HeroSectionProps) => {
             opacity: smoothOpacity,
             y: smoothTranslateY,
           }}
-          className="max-sm:hidden text-white text-3xl absolute bottom-1/10 flex px-[10%] justify-between w-screen z-50"
+          className="max-sm:hidden text-white text-3xl absolute bottom-1/10 flex px-[10%] lg:justify-between w-screen z-50 md:flex-wrap"
         >
-          <div className="mix-blend-color flex gap-8">
-            <h1 className="text-[10vh] font-black uppercase">
+          <div className="mix-blend-color flex gap-8 md:flex-wrap lg:flex-nowrap">
+            <h1 className="md:text-[10vh] lg:text-[10vh] font-black uppercase">
               Leighton
               <span className="text-[3vh] font-medium pl-2">Museum</span>
             </h1>
@@ -205,7 +217,7 @@ const HeroSection = ({ setIsSectionVisible }: HeroSectionProps) => {
             </div>
           </div>
 
-          <motion.div className="flex h-auto items-center mt-auto pb-4 gap-2 text-[1.9rem]">
+          <motion.div className="flex h-auto items-center mt-auto pb-4 lg:gap-2 text-[1.9rem] md:gap-2.5">
             {socialLinks.map((item, index) => {
               return (
                 <div

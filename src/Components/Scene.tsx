@@ -1,6 +1,8 @@
 import { IoMdClose } from "react-icons/io";
 import { IoMdSettings } from "react-icons/io";
+import { IoReturnUpBack } from "react-icons/io5";
 import { HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
+
 import { Description } from "../assets/types";
 import { Canvas } from "@react-three/fiber";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,11 +14,14 @@ import EntranceCamera from "./EntranceCamera";
 import { AnimationClick } from "../assets/hooks";
 import { controlsText } from "../assets/controlsText";
 
+import { useNavigate } from "react-router-dom";
+
 type SceneProps = {
   className?: string;
 };
 
 const Scene = ({ className }: SceneProps) => {
+  const navigate = useNavigate();
   const [hovered, setHovered] = useState<string | null>(null);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [description, setDescription] = useState<Description | null>(null);
@@ -140,6 +145,7 @@ const Scene = ({ className }: SceneProps) => {
         ))}
       </Canvas>
 
+      {/* DESCRIPTION ITEM */}
       <AnimatePresence>
         {isClicked && (
           <motion.div
@@ -150,7 +156,7 @@ const Scene = ({ className }: SceneProps) => {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="absolute h-screen top-0 w-screen px-32 bg-black/75 text-white border border-black flex flex-col justify-center items-center gap-12"
+            className="absolute h-screen top-0 w-screen md:px-32 bg-black/75 text-white border border-black flex flex-col justify-center items-center gap-12"
           >
             <motion.span
               initial={{ opacity: 0 }}
@@ -168,7 +174,7 @@ const Scene = ({ className }: SceneProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease: "easeOut" }}
-              className="text-5xl font-bold"
+              className="text-5xl md:text-5xl font-bold text-wrap text-center"
             >
               {description?.name}
             </motion.h1>
@@ -177,7 +183,7 @@ const Scene = ({ className }: SceneProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease: "easeOut" }}
-              className="text-2xl px-[30%] text-center"
+              className="text-2xl px-[10%] md:px-[15%] lg:px-[30%] text-center"
             >
               {description?.description}
             </motion.p>
@@ -187,7 +193,7 @@ const Scene = ({ className }: SceneProps) => {
 
       {/* SETTINGS BUTTON */}
       <AnimatePresence mode="wait">
-        {isLoaded && !controls &&(
+        {isLoaded && !controls && !isClicked && (
           <motion.div
             variants={{
               visible: { opacity: 1, y: 0 },
@@ -230,7 +236,15 @@ const Scene = ({ className }: SceneProps) => {
             exit="exit"
             className="bg-black/70 w-screen h-screen absolute top-0 z-[999] flex items-center justify-center"
           >
-            <div className="bg-white/90 md:w-[60vw] h-[80vh] rounded-2xl text-black font-bold flex justify-between items-center px-[2%] overflow-hidden relative w-screen mx-[5%] md:mx-0">
+            <div className="bg-white/90 h-[80vh] lg:w-[60vw] md:h-[85vh] rounded-2xl text-black font-bold flex justify-between items-center px-[2%] overflow-hidden relative w-screen mx-[5%] md:mx-[5%] lg:mx-0">
+              
+              {/* RETURN TO HOME PAGE BTN */}
+              <span
+              onClick={() => navigate("/")} 
+              className="text-black fixed top-6 left-6 bg-white rounded-full p-1 cursor-pointer">
+                <IoReturnUpBack size={40}></IoReturnUpBack>
+              </span>
+
               {/* Left arrow */}
               <motion.span
                 className="rounded-full bg-black/80 flex items-center justify-center"
@@ -281,7 +295,7 @@ const Scene = ({ className }: SceneProps) => {
 
             <IoMdClose
               size={48}
-              className="text-white absolute top-10 md:left-[95%] cursor-pointer left-[85%]"
+              className="text-white fixed top-6 right-4 z-[1000] cursor-pointer"
               onClick={() => toggleControls(false)}
             />
           </motion.div>

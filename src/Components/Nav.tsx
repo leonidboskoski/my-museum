@@ -96,7 +96,7 @@ const Nav = ({
             Go Beyond
           </motion.button>
         </div>
-        <div className="md:hidden">
+        <div className="sm:hidden md:hidden">
           <IoIosMenu
             onClick={() => toggleMenu(!menu)}
             size={50}
