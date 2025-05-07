@@ -240,7 +240,7 @@ const Scene = ({ className }: SceneProps) => {
               
               {/* RETURN TO HOME PAGE BTN */}
               <span
-              onClick={() => navigate("/")} 
+              onClick={() => navigate(-1)} 
               className="text-black fixed top-6 left-6 bg-white rounded-full p-1 cursor-pointer">
                 <IoReturnUpBack size={40}></IoReturnUpBack>
               </span>

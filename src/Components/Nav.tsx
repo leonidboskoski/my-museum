@@ -69,7 +69,7 @@ const Nav = ({
       <nav className="fixed top-10 max-sm:px-[5%] px-[3%] justify-between flex w-screen font-extrabold items-center mix-blend-difference z-50">
         <div
           className={`text-3xl tracking-tighter flex mix-blend-difference text-white ${
-            IsSectionVisible ? "" : "cursor-pointer"
+            IsSectionVisible || IsSectionVisible2 ? "" : "cursor-pointer"
           }`}
         >
           <FlipLink
@@ -162,7 +162,7 @@ const FlipLink = ({
   return (
     <motion.a
       initial="initial"
-      whileHover={IsSectionVisible ? undefined : "hovered"}
+      whileHover={IsSectionVisible || IsSectionVisible2 ? undefined : "hovered"}
       className="relative block overflow-hidden whitespace-nowrap"
       animate={IsSectionVisible || IsSectionVisible2 ? "hidden" : "visible"}
     >

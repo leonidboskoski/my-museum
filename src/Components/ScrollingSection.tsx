@@ -1,5 +1,4 @@
 import ScrollScene from "./ScrollScene";
-import { Section } from "./Section";
 import { SectionNew } from "./SectionNew";
 import { scrollSections } from "../assets/buttons";
 import { useInView } from "framer-motion";
